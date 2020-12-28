@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
-from pydub import AudioSegment
-from pydub.playback import play
+# from pydub import AudioSegment
+# from pydub.playback import play
 import os
 import time
 
@@ -48,10 +48,10 @@ async def amo(ctx, *args):
     else:
         file_name = 'amo1'
 
-    if args[1:2]:
-        pitch = float(int(args[1]) / 100)
-        change(file_name, pitch)
-        file_name = 'out'
+    # if args[1:2]:
+    #     pitch = float(int(args[1]) / 100)
+    #     change(file_name, pitch)
+    #     file_name = 'out'
 
     voice_file = discord.FFmpegPCMAudio('./wav/' + file_name + '.wav')
     await ctx.message.guild.voice_client.play(voice_file)
@@ -71,14 +71,14 @@ async def bye(ctx):
     await bot.close()
     sys.exit()
 
-def change(file_name, pitch):
-    sound = AudioSegment.from_file('./wav/' + file_name + '.wav', format="wav")
-    octaves = 0.5
-    new_sample_rate = int(sound.frame_rate * (pitch ** octaves))
+# def change(file_name, pitch):
+#     sound = AudioSegment.from_file('./wav/' + file_name + '.wav', format="wav")
+#     octaves = 0.5
+#     new_sample_rate = int(sound.frame_rate * (pitch ** octaves))
 
-    hipitch_sound = sound._spawn(sound.raw_data, overrides={'frame_rate': new_sample_rate})
-    hipitch_sound = hipitch_sound.set_frame_rate(44100)
-    hipitch_sound.export("./wav/out.wav", format="wav")
+#     hipitch_sound = sound._spawn(sound.raw_data, overrides={'frame_rate': new_sample_rate})
+#     hipitch_sound = hipitch_sound.set_frame_rate(44100)
+#     hipitch_sound.export("./wav/out.wav", format="wav")
     
 
 bot.run(ACCESS_TOKEN)
